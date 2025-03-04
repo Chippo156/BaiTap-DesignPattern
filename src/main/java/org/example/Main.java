@@ -1,13 +1,14 @@
 package org.example;
 
-import org.example.DecoratorPattern.EmployeeBasic;
-import org.example.DecoratorPattern.EmployeeInteface;
-import org.example.DecoratorPattern.OfficeStaffDecorator;
-import org.example.DecoratorPattern.TeamLeaderDecorator;
+import org.example.DecoratorPattern.*;
 import org.example.NoPattern.Employee;
 import org.example.StatePattern.EmployeeStatePattern;
 import org.example.StatePattern.PositionState;
 import org.example.StatePattern.TeamLeader;
+import org.example.StrategyPattern.DirectorWork;
+import org.example.StrategyPattern.OfficeStaffWork;
+import org.example.StrategyPattern.TeamLeaderWork;
+import org.example.StrategyPattern.WorkStrategy;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -33,7 +34,7 @@ public class Main {
         employee1.work();
 
         // Nhân viên Văn Phòng
-        EmployeeInteface employee2 = new OfficeStaffDecorator(new EmployeeBasic("Trần Thị B"));
+        EmployeeInteface employee2 = new OfficeStaffDecorator(new TeamLeaderDecorator(new EmployeeDecorator(new EmployeeBasic("Trần Văn B"))));
         System.out.println("\n🔹 Nhân viên Văn Phòng:");
         employee2.work();
 
@@ -44,6 +45,15 @@ public class Main {
         System.out.println("=====================================");
 
 
+        System.out.println("=====================================");
+        System.out.println("Apply Strategy pattern");
+
+        WorkStrategy workStrategy = new DirectorWork("Nguyen Van B");
+        workStrategy.executeWork();
+        WorkStrategy workStrategy1 = new OfficeStaffWork();
+        workStrategy1.executeWork();
+        WorkStrategy workStrategy2 = new TeamLeaderWork();
+        workStrategy2.executeWork();
 
 
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
