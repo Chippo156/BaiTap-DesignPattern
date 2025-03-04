@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.DecoratorPattern.EmployeeBasic;
+import org.example.DecoratorPattern.EmployeeInteface;
+import org.example.DecoratorPattern.OfficeStaffDecorator;
+import org.example.DecoratorPattern.TeamLeaderDecorator;
 import org.example.NoPattern.Employee;
 import org.example.StatePattern.EmployeeStatePattern;
 import org.example.StatePattern.PositionState;
@@ -19,6 +23,24 @@ public class Main {
         PositionState teamLeader = new TeamLeader();
         EmployeeStatePattern employeeStatePattern = new EmployeeStatePattern("Huy",teamLeader);
         employeeStatePattern.work();
+        System.out.println("=====================================");
+        System.out.println("=====================================");
+        System.out.println("Apply Decorator pattern");
+
+
+        EmployeeInteface employee1 = new EmployeeBasic("Nguyễn Văn A");
+        System.out.println("\n🔹 Nhân viên bình thường:");
+        employee1.work();
+
+        // Nhân viên Văn Phòng
+        EmployeeInteface employee2 = new OfficeStaffDecorator(new EmployeeBasic("Trần Thị B"));
+        System.out.println("\n🔹 Nhân viên Văn Phòng:");
+        employee2.work();
+
+        // Nhân viên Xưởng kiêm Đội Trưởng
+        EmployeeInteface employee3 = new TeamLeaderDecorator(new EmployeeBasic("Lê Văn C"));
+        System.out.println("\n🔹 Nhân viên Xưởng kiêm Đội Trưởng:");
+        employee3.work();
         System.out.println("=====================================");
 
 
