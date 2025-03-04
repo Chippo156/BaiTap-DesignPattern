@@ -1,4 +1,4 @@
-package org.example.entity;
+package org.example.NoPattern;
 
 public class Employee {
     private String name;
