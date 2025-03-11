@@ -7,8 +7,8 @@ public class Student implements Observer{
     public Student(String name) {
         this.name = name;
     }
-    @Override
-    public void update() {
-        System.out.println("Student " + name + " has been notified");
+        @Override
+        public void update() {
+            System.out.println("Student " + name + " has been notified");
     }
 }
