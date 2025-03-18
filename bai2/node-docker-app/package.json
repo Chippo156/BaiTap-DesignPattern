@@ -1,0 +1,14 @@
+{
+  "name": "node-docker-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js app to display 'Hello, Docker!'",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
