@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_container
+    environment:
+      PMA_HOST: mysql 
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: rootpassword 
+    ports:
+      - "8081:80" 
+    depends_on:
+      - mysql
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress_container
+    ports:
+      - "8083:83" # Ánh xạ cổng 8080 của máy host với cổng 80 của container
+    environment:
+      - WORDPRESS_DB_HOST=mysql:3306 # Địa chỉ của MySQL
+      - WORDPRESS_DB_NAME=wordpress # Tên database của WordPress
+      - WORDPRESS_DB_USER=root # Tên người dùng MySQL
+      - WORDPRESS_DB_PASSWORD=rootpassword # Mật khẩu của MySQL
+    volumes:
+      - wordpress-data:/var/www/html # Dung lượng lưu trữ dữ liệu WordPress
+    depends_on:
+      - mysql # Đảm bảo WordPress khởi động sau MySQL
+volumes:
+  mysql_data: 
+  wordpress-data:

@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_container
+    ports:
+      - "27017:27017"  # Ánh xạ cổng 27017 của máy chủ với cổng 27017 của container
+    volumes:
+      - mongo-data:/data/db  # Lưu trữ dữ liệu MongoDB ngoài container
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express_container
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo  # Địa chỉ của MongoDB (tên service)
+      - ME_CONFIG_MONGODB_PORT=27017     # Cổng của MongoDB
+      - ME_CONFIG_BASICAUTH_USERNAME=admin  # Tên người dùng để đăng nhập Mongo Express
+      - ME_CONFIG_BASICAUTH_PASSWORD=adminpassword  # Mật khẩu của người dùng
+    ports:
+      - "8081:8081"  # Ánh xạ cổng 8081 của máy chủ với cổng 8081 của container Mongo Express
+    depends_on:
+      - mongo  # Đảm bảo Mongo Express chạy sau MongoDB
+
+volumes:
+  mongo-data:
